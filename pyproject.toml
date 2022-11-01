@@ -4,7 +4,7 @@ version = "0.1.0"
 description = ""
 authors = ["Strollby Developers <backend.developers@strollby.com>"]
 readme = "README.md"
-packages = [{include = "retry_extended", from = "src"}]
+packages = [{include = "retry"}]
 
 [tool.poetry.dependencies]
 python = "^3.7"
