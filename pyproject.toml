@@ -11,6 +11,7 @@ documentation = "https://github.com/strollby/retry-extended"
 keywords = [
     "retry",
     "retry-extended",
+    "python-retry",
 ]
 
 classifiers = [
