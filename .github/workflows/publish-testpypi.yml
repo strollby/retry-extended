@@ -43,5 +43,5 @@ jobs:
         run: |
           poetry config repositories.testpypi https://test.pypi.org/legacy/
           poetry config pypi-token.testpypi ${{ secrets.TESTPI_API_TOKEN }}
-          poetry version "$(poetry version --short)+testrelease"
+          poetry version minor
           poetry publish --build --repository testpypi 
