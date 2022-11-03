@@ -1,10 +1,33 @@
 [tool.poetry]
 name = "retry-extended"
 version = "0.1.0"
-description = ""
+description = "Retry API compatible extended library"
 authors = ["Strollby Developers <backend.developers@strollby.com>"]
 readme = "README.md"
+license = "Apache-2.0"
+homepage = "https://github.com/strollby/retry-extended"
+repository = "https://github.com/strollby/retry-extended"
+documentation = "https://github.com/strollby/retry-extended"
+keywords = [
+    "retry",
+    "retry-extended",
+]
+
+classifiers = [
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12"
+
+]
+
 packages = [{include = "retry"}]
+
+[tool.poetry.urls]
+"Bug Tracker" = "https://github.com/strollby/retry-extended/issues"
 
 [tool.poetry.dependencies]
 python = "^3.7"
