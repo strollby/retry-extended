@@ -41,7 +41,7 @@ jobs:
           pip install poetry
       - name: Build package
         run: |
-          poetry version "$(python version --short)+build-$(date +'%Y%m%d%H%M%S')"
+          poetry version "$(poetry version --short | cut -f1 -d + )+build-$(date +'%Y%m%d%H%M%S')"
           poetry build
       - name: Upload to GitHub Artifacts
         uses: actions/upload-artifact@v3
