@@ -1,7 +1,7 @@
 # This workflow will install Python dependencies, run tests and lint with a single version of Python
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
 
-name: TestPyPI Publish
+name: Build Package
 
 on:
   workflow_run:
@@ -39,9 +39,12 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install poetry
-      - name: Build & Release package
+      - name: Build package
         run: |
-          poetry config repositories.testpypi https://test.pypi.org/legacy/
-          poetry config pypi-token.testpypi ${{ secrets.TESTPI_API_TOKEN }}
-          poetry version minor
-          poetry publish --build --repository testpypi 
+          poetry version "$(python version --short)+build-$(date +'%Y%m%d%H%M%S')"
+          poetry build
+      - name: Upload to GitHub Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: retry-extended-dist
+          path: dist/ 
