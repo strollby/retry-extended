@@ -1,9 +1,9 @@
-__all__ = ['retry', 'retry_call']
+__all__ = ["retry", "retry_call"]
 
 import logging
 
 from .api import retry, retry_call
-from .compat import NullHandler
+from logging import NullHandler
 
 
 # Set default logging handler to avoid "No handler found" warnings.

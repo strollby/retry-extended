@@ -1,15 +1,18 @@
 import functools
-import logging
-
 
 try:
     from decorator import decorator
 except ImportError:
+
     def decorator(caller):
-        """ Turns caller into a decorator.
+        """Turns caller into a decorator.
         Unlike decorator module, function signature is not preserved.
 
-        :param caller: caller(f, *args, **kwargs)
+        Args:
+            caller: caller(f, *args, **kwargs)
+
+        Returns:
+            decorator
         """
         def decor(f):
             @functools.wraps(f)
@@ -17,12 +20,3 @@ except ImportError:
                 return caller(f, *args, **kwargs)
             return wrapper
         return decor
-
-
-try:  # Python 2.7+
-    from logging import NullHandler
-except ImportError:
-    class NullHandler(logging.Handler):
-
-        def emit(self, record):
-            pass
