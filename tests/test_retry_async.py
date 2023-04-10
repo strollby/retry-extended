@@ -1,14 +1,16 @@
 import asyncio
+import sys
 
 try:
     from unittest.mock import create_autospec
 except ImportError:
     from mock import create_autospec
 
-try:
-    from unittest.mock import AsyncMock
-except ImportError:
-    from mock import AsyncMock
+if sys.version_info >= (3, 8):
+    try:
+        from unittest.mock import AsyncMock
+    except ImportError:
+        from mock import AsyncMock
 
 
 import pytest
@@ -127,6 +129,8 @@ async def test_fixed_jitter(monkeypatch):
     assert mock_sleep_time[0] == sum(range(tries - 1))
 
 
+@pytest.mark.skipif(sys.version_info < (3, 8),
+                    reason="requires python>=3.8")
 @pytest.mark.asyncio
 async def test_retry_call():
     f_mock = AsyncMock(side_effect=RuntimeError)
@@ -139,6 +143,8 @@ async def test_retry_call():
     assert f_mock.call_count == tries
 
 
+@pytest.mark.skipif(sys.version_info < (3, 8),
+                    reason="requires python>=3.8")
 @pytest.mark.asyncio
 async def test_retry_call_2():
     side_effect = [RuntimeError, RuntimeError, 3]
@@ -154,6 +160,8 @@ async def test_retry_call_2():
     assert f_mock.call_count == len(side_effect)
 
 
+@pytest.mark.skipif(sys.version_info < (3, 8),
+                    reason="requires python>=3.8")
 @pytest.mark.asyncio
 async def test_retry_call_with_args():
     async def f(value=0):
@@ -174,6 +182,8 @@ async def test_retry_call_with_args():
     assert f_mock.call_count == 1
 
 
+@pytest.mark.skipif(sys.version_info < (3, 8),
+                    reason="requires python>=3.8")
 @pytest.mark.asyncio
 async def test_retry_call_with_kwargs():
     async def f(value=0):

@@ -52,9 +52,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install poetry
-
     - name: Build & Release package
       run: |
         poetry config pypi-token.pypi ${{ secrets.PYPI_API_TOKEN }}
-#        poetry version patch
         poetry publish --build
