@@ -1,5 +1,4 @@
 import asyncio
-import inspect
 import logging
 import random
 import time
@@ -112,7 +111,7 @@ async def __retry_internal_async(
     _tries, _delay = tries, delay
     while _tries:
         try:
-            return await f(*args, *kwargs)
+            return await f(*args, **kwargs)
         except exceptions as e:
             _tries -= 1
             if not _tries:
