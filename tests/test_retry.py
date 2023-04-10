@@ -147,7 +147,11 @@ def test_retry_call_2():
 
 
 def test_retry_call_with_args():
+    call_count = 0
+
     def f(value=0):
+        nonlocal call_count
+        call_count += 1
         if value < 0:
             return value
         else:
@@ -155,18 +159,21 @@ def test_retry_call_with_args():
 
     return_value = -1
     result = None
-    f_mock = MagicMock(spec=f, return_value=return_value)
     try:
-        result = retry_call(f_mock, fargs=[return_value])
+        result = retry_call(f, fargs=[return_value])
     except RuntimeError:
         pass
 
     assert result == return_value
-    assert f_mock.call_count == 1
+    assert call_count == 1
 
 
 def test_retry_call_with_kwargs():
+    call_count = 0
+
     def f(value=0):
+        nonlocal call_count
+        call_count += 1
         if value < 0:
             return value
         else:
@@ -174,11 +181,10 @@ def test_retry_call_with_kwargs():
 
     kwargs = {"value": -1}
     result = None
-    f_mock = MagicMock(spec=f, return_value=kwargs["value"])
     try:
-        result = retry_call(f_mock, fkwargs=kwargs)
+        result = retry_call(f, fkwargs=kwargs, tries=3)
     except RuntimeError:
         pass
 
     assert result == kwargs["value"]
-    assert f_mock.call_count == 1
+    assert call_count == 1
