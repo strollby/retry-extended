@@ -55,4 +55,8 @@ jobs:
     - name: Build & Release package
       run: |
         poetry config pypi-token.pypi ${{ secrets.PYPI_API_TOKEN }}
+        poetry version patch
         poetry publish --build
+        git add pyproject.toml
+        git commit -m "BumpVer: Bumped Minor version patch on release"
+        git push
