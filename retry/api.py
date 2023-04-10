@@ -173,11 +173,14 @@ def retry(
             return __retry_internal(func, args, kwargs, exceptions, tries, delay, max_delay, backoff, jitter, logger)
 
         async def wrapper_async(*args: dict, **kwargs: dict) -> Any:
-            return await __retry_internal_async(func, args, kwargs, exceptions, tries, delay, max_delay, backoff, jitter, logger)
+            return await __retry_internal_async(
+                func, args, kwargs, exceptions, tries, delay, max_delay, backoff, jitter, logger
+            )
 
         if asyncio.iscoroutinefunction(func):
             return wrapper_async
         return wrapper
+
     return retry_decorator
 
 
@@ -229,4 +232,3 @@ def retry_call(
     if asyncio.iscoroutinefunction(f):
         return __retry_internal_async(f, args, kwargs, exceptions, tries, delay, max_delay, backoff, jitter, logger)
     return __retry_internal(f, args, kwargs, exceptions, tries, delay, max_delay, backoff, jitter, logger)
-
