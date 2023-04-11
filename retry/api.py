@@ -2,7 +2,7 @@ import asyncio
 import logging
 import random
 import time
-
+import functools
 from typing import Callable, Optional, Any
 
 
@@ -168,9 +168,11 @@ def retry(
     """
 
     def retry_decorator(func):
+        @functools.wraps(func)
         def wrapper(*args: dict, **kwargs: dict) -> Any:
             return __retry_internal(func, args, kwargs, exceptions, tries, delay, max_delay, backoff, jitter, logger)
 
+        @functools.wraps(func)
         async def wrapper_async(*args: dict, **kwargs: dict) -> Any:
             return await __retry_internal_async(
                 func, args, kwargs, exceptions, tries, delay, max_delay, backoff, jitter, logger
