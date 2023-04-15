@@ -9,6 +9,6 @@ This package had been developed on top of the original python [retry](https://gi
 
 
 ### Roadmap
-- [ ] Type Hints and Annotations & Clean up code
-- [ ] Follow [Google Style guide](https://google.github.io/styleguide/pyguide.html)
-- [ ] Async implementation for retry
+- [x] Type Hints and Annotations & Clean up code
+- [x] Follow [Google Style guide](https://google.github.io/styleguide/pyguide.html)
+- [x] Async implementation for retry
