@@ -5,22 +5,21 @@ import time
 import functools
 from typing import Callable, Optional, Any
 
-
 DEFAULT_LOGGER = logging.getLogger(__name__)
 DEFAULT_ASYNC_LOGGER = logging.getLogger("asyncio")
 
 
 def __retry_internal(
-    f: Callable,
-    args: tuple,
-    kwargs: dict,
-    exceptions: tuple = (Exception,),
-    tries: int = -1,
-    delay: int = 0,
-    max_delay: Optional[int] = None,
-    backoff: int = 1,
-    jitter: int = 0,
-    logger: logging.Logger = DEFAULT_LOGGER,
+        f: Callable,
+        args: tuple,
+        kwargs: dict,
+        exceptions: tuple = (Exception,),
+        tries: int = -1,
+        delay: int = 0,
+        max_delay: Optional[int] = None,
+        backoff: int = 1,
+        jitter: int = 0,
+        logger: logging.Logger = DEFAULT_LOGGER,
 ):
     """
     Executes a function and retries it if it failed.
@@ -72,16 +71,16 @@ def __retry_internal(
 
 
 async def __retry_internal_async(
-    f: Callable,
-    args: tuple,
-    kwargs: dict,
-    exceptions: tuple = (Exception,),
-    tries: int = -1,
-    delay: int = 0,
-    max_delay: Optional[int] = None,
-    backoff: int = 1,
-    jitter: int = 0,
-    logger: logging.Logger = DEFAULT_ASYNC_LOGGER,
+        f: Callable,
+        args: tuple,
+        kwargs: dict,
+        exceptions: tuple = (Exception,),
+        tries: int = -1,
+        delay: int = 0,
+        max_delay: Optional[int] = None,
+        backoff: int = 1,
+        jitter: int = 0,
+        logger: logging.Logger = DEFAULT_ASYNC_LOGGER,
 ):
     """
     Executes a function and retries it if it failed.
@@ -133,14 +132,14 @@ async def __retry_internal_async(
 
 
 def retry(
-    # func,
-    exceptions: tuple = (Exception,),
-    tries: int = -1,
-    delay: int = 0,
-    max_delay: Optional[int] = None,
-    backoff: int = 1,
-    jitter: int = 0,
-    logger: logging.Logger = DEFAULT_LOGGER,
+        # func,
+        exceptions: tuple = (Exception,),
+        tries: int = -1,
+        delay: int = 0,
+        max_delay: Optional[int] = None,
+        backoff: int = 1,
+        jitter: int = 0,
+        logger: logging.Logger = DEFAULT_LOGGER,
 ):
     """
     Returns a retry decorator.
@@ -169,11 +168,11 @@ def retry(
 
     def retry_decorator(func):
         @functools.wraps(func)
-        def wrapper(*args: dict, **kwargs: dict) -> Any:
+        def wrapper(*args: tuple, **kwargs: dict) -> Any:
             return __retry_internal(func, args, kwargs, exceptions, tries, delay, max_delay, backoff, jitter, logger)
 
         @functools.wraps(func)
-        async def wrapper_async(*args: dict, **kwargs: dict) -> Any:
+        async def wrapper_async(*args: tuple, **kwargs: dict) -> Any:
             return await __retry_internal_async(
                 func, args, kwargs, exceptions, tries, delay, max_delay, backoff, jitter, logger
             )
@@ -186,16 +185,16 @@ def retry(
 
 
 def retry_call(
-    f,
-    fargs: tuple = None,
-    fkwargs: dict = None,
-    exceptions: tuple = (Exception,),
-    tries: int = -1,
-    delay: int = 0,
-    max_delay: Optional[int] = None,
-    backoff: int = 1,
-    jitter: int = 0,
-    logger: logging.Logger = DEFAULT_LOGGER,
+        f,
+        fargs: tuple = None,
+        fkwargs: dict = None,
+        exceptions: tuple = (Exception,),
+        tries: int = -1,
+        delay: int = 0,
+        max_delay: Optional[int] = None,
+        backoff: int = 1,
+        jitter: int = 0,
+        logger: logging.Logger = DEFAULT_LOGGER,
 ):
     """
     Calls a function and re-executes it if it failed.
