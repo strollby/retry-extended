@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "retry-extended"
-version = "0.2.2"
+version = "0.2.3"
 description = "Retry API compatible extended library"
 authors = ["Strollby Developers <backend.developers@strollby.com>"]
 readme = "README.md"
