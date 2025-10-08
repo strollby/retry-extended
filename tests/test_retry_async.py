@@ -1,18 +1,7 @@
 import asyncio
 import sys
 
-try:
-    from unittest.mock import create_autospec
-except ImportError:
-    from mock import create_autospec
-
-if sys.version_info >= (3, 8):
-    try:
-        from unittest.mock import AsyncMock
-    except ImportError:
-        from mock import AsyncMock
-
-
+from unittest.mock import AsyncMock
 import pytest
 
 from retry.api import retry_call
