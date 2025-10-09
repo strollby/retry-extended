@@ -1,13 +1,4 @@
-try:
-    from unittest.mock import create_autospec
-except ImportError:
-    from mock import create_autospec
-
-try:
-    from unittest.mock import MagicMock
-except ImportError:
-    from mock import MagicMock
-
+from unittest.mock import MagicMock
 import time
 
 import pytest
