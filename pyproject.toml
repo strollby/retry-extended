@@ -30,7 +30,7 @@ requires-python = ">=3.9"
 dependencies = []
 
 [dependency-groups]
-dev = [
+lint = [
     "ruff (>=0.15)"
 ]
 test = [
